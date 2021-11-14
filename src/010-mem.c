@@ -5,6 +5,7 @@ typedef unsigned char byte_t;
 typedef struct mem_t {
 	byte_t* self;
 	byte_t* next;
+	byte_t* prev;
 	size_t size;
 	size_t len;
 	byte_t* data;
@@ -13,14 +14,21 @@ typedef struct mem_t {
 const size_t header_size = sizeof(mem_t);
 const size_t mem_def_size = header_size << 1;
 
+void mem_zero(size_t* p, size_t b) {
+	register size_t n = b / sizeof(size_t);
+	for (size_t i = 0; i < n; ++i) {
+		p[i] = 0L;
+	}
+}
+
 void mem_init(mem_t** first) {
 	byte_t* buffer = malloc(mem_def_size);
-	for (size_t i = 0; i < mem_def_size; ++i) {
-		buffer[i] = 0;
-	}
+	if (!buffer) return;
+	mem_zero((size_t*) buffer, mem_def_size);
 	*first = (mem_t*) buffer;
 	(*first)->self = buffer;
 	(*first)->next = NULL;
+	(*first)->prev = NULL;
 	(*first)->size = header_size;
 	(*first)->len = header_size;
 	(*first)->data = NULL;
@@ -32,26 +40,37 @@ mem_t* mem_first() {
 	return first;
 }
 
+mem_t* mem_last(mem_t* replace) {
+	static mem_t* last = NULL;
+	return replace ? (last = replace) : (last ? last : (last = mem_first()));
+}
+
 mem_t* mem_new(mem_t* prev, size_t size) {
 	while (prev->next && ((mem_t*) prev->next != prev)) {
 		prev = (mem_t*) prev->next;
 	}
-	const size_t alloc_size = size + mem_def_size;
+	const size_t alloc_size = ((((size + mem_def_size - 1) >> sizeof(size_t)) + 1) << sizeof(size_t));
 	byte_t* buffer = malloc(alloc_size);
-	for (size_t i = 0; i < alloc_size; ++i) {
-		buffer[i] = 0;
-	}
+	if (!buffer) return NULL;
+	mem_zero((size_t*) buffer, alloc_size);
 	mem_t* next = (mem_t*) buffer;
 	next->self = buffer;
 	next->next = NULL;
 	next->size = size;
 	next->len = size;
 	next->data = (byte_t*) next + header_size;
+	next->prev = (byte_t*) prev;
 	prev->next = (byte_t*) next;
 	return next;
 }
 
-mem_t* mem_seek(mem_t* prev, size_t size) {
+mem_t* mem_alloc(size_t size) {
+	register mem_t* prev = mem_last(NULL);
+	if (!prev) return NULL; // mem_init() -> malloc() failed
+	while (prev->len && prev->next) {
+		prev = (mem_t*) prev->next;
+	}
+	mem_last(prev);
 	while (1) {
 		if (!prev->len && (prev->size >= size)) {
 			prev->len = size;
@@ -64,11 +83,18 @@ mem_t* mem_seek(mem_t* prev, size_t size) {
 	}
 }
 
-mem_t* mem_alloc(size_t size) {
-	return mem_seek(mem_first(), size);
-}
-
 void mem_free(mem_t* mem) {
+	mem_t* last = mem_last(NULL);
+	while (last->next) {
+		last = (mem_t*) last->next;
+	}
+	mem_t* prev = (mem_t*) mem->prev;
+	mem_t* next = (mem_t*) mem->next;
+	prev->next = (byte_t*) next;
+	next->prev = (byte_t*) prev;
+	last->next = (byte_t*) mem;
+	mem->prev = (byte_t*) last;
+	mem->next = NULL;
 	mem->len = 0;
 }
 
