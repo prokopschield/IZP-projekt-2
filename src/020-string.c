@@ -45,7 +45,7 @@ string_t str_readline(FILE* file) {
 	size_t len = 0;
 	for (int c = getc(file); c != '\n' && c != '\r' && c != EOF; c = getc(file)) ++len;
 	fsetpos(file, &fpos);
-	mem_t* mem = mem_alloc(len);
+	mem_t* mem = mem_alloc(len + 1);
 	for (size_t i = 0; i < len; ++i) {
 		mem->data[i] = getc(file);
 	}
