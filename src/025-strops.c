@@ -15,7 +15,7 @@ string_t strop_read_word(string_t* restrict str, int* index) {
 	strop_skip_ws(str, index);
 	int i = *index;
 	int l = 0;
-	while (str->data[i + l++] > ' ');
+	while (str->data[i + l] > ' ') ++l;
 	string_t substr = str_alloc(l);
 	for (int j = 0; j < l; ++j) {
 		substr.data[j] = str->data[(*index)++];
