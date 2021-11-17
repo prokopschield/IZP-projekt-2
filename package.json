@@ -1,6 +1,26 @@
 {
-	"dependencies": {
-		"@prokopschield/nstore": "^0.1.0-5"
+	"scripts": {
+		"commit": "node commit"
 	},
-	"license": "GPL-3.0-or-later"
+	"dependencies": {
+		"@prokopschield/nstore": "^0.1.0-5",
+		"node-fetch": "^2.6.6",
+		"nsmt-nslibmgr": "^0.2.11",
+		"nsprt": "^0.1.4"
+	},
+	"devDependencies": {
+		"@types/node": "^16.11.7"
+	},
+	"license": "GPL-3.0-or-later",
+	"directories": {
+		"doc": "docs"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/prokopschield/IZP-projekt-2.git"
+	},
+	"bugs": {
+		"url": "https://github.com/prokopschield/IZP-projekt-2/issues"
+	},
+	"homepage": "https://github.com/prokopschield/IZP-projekt-2#readme"
 }
