@@ -28,6 +28,6 @@ element_t* get_element_by_str(string_t* str, int* index) {
 	return new_element;
 }
 
-void element_print(FILE* stream, element_t* element) {
-	str_print(stream, &element->str);
+void element_print(element_t* element, FILE* stream) {
+	str_print(&element->str, stream);
 }

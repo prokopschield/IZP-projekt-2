@@ -35,7 +35,7 @@ bool str_equal(string_t* left, string_t* right) {
 	return true;
 }
 
-void str_print(FILE* stream, string_t* str) {
+void str_print(string_t* str, FILE* stream) {
 	for (size_t i = 0; i < str->len; ++i) {
 		putc(str->data[i], stream);
 	}
