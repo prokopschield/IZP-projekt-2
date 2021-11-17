@@ -8,7 +8,7 @@ typedef struct element_t {
 typedef struct set_t {
 	size_t line;
 	size_t number_of_elements;
-	element_t* elements[];
+	element_t** elements;
 } set_t;
 
 typedef struct pair_t {
@@ -19,7 +19,7 @@ typedef struct pair_t {
 typedef struct rel_t {
 	size_t line;
 	size_t number_of_pairs;
-	pair_t* pairs[];
+	pair_t** pairs;
 } rel_t;
 
 enum line_type_t {
