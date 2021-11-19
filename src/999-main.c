@@ -2,9 +2,12 @@
 
 int main() {
 
-    set_t set1;
-    set1.line = 1;
-    set1.number_of_elements = 0;
+
+    element_t e = { 1, NULL };
+    element_t* pole[] = { &e };
+    set_t set1 = { 0, 1, &pole };
+
+
 
 //    printf("%s", set1.elements[0]->str.data);
 
