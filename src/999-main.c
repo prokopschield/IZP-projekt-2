@@ -3,9 +3,8 @@
 int main() {
 
 
-    element_t e = { 1, NULL };
-    element_t* pole[] = { &e };
-    set_t set1 = { 0, 1, &pole };
+
+    set_t set1 = { 0, 1, NULL };
 
 
 
