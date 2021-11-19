@@ -5,6 +5,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void Command_card (set_t *set) {
-    printf("%zu\n", set->number_of_elements);
+int Cmd_card (set_t *set) {
+    return set->number_of_elements;
 }
