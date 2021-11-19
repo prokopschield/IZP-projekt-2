@@ -5,3 +5,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+void Command_card (set_t *set) {
+    putchar(set->number_of_elements);
+}
