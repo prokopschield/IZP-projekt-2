@@ -4,7 +4,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
 void Cmd_intersect (set_t *set1, set_t *set2) {
     for (int i = 0; i < (int) set1->number_of_elements; i++) {
