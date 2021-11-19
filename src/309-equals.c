@@ -4,8 +4,10 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
-void Cmd_equals (set_t *set1, set_t *set2) {
-
+bool Cmd_equals (set_t *set1, set_t *set2) {
+    if (Cmd_subset (set1, set2) && Cmd_subset (set2, set1))
+        return true;
+    else
+        return false;
 }
