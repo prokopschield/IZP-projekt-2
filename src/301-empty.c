@@ -4,9 +4,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void Cmd_empty (set_t *set) {
+bool Cmd_empty (set_t *set) {
     if (set->number_of_elements == 0)
-        printf("true\n");
+        return true;
     else
-        printf("false\n");
+        return false;
 }
