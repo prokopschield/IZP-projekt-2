@@ -77,3 +77,11 @@ set_t* expand_set(element_t* element, set_t* set) {
 void add_element_to_set(element_t* element, set_t** set) {
 	expand_set(element,* set);
 }
+
+void set_print(set_t* set, FILE* stream) {
+	putc('S', stream);
+	for (size_t i = 0; i < set->number_of_elements; ++i) {
+		element_print(set->elements[i], stream);
+	}
+	putc('\n', stream);
+}
