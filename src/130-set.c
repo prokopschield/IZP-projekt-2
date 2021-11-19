@@ -74,6 +74,6 @@ set_t* expand_set(element_t* element, set_t* set) {
 	return new_set;
 }
 
-void all_element_to_set(element_t* element, set_t** set) {
+void add_element_to_set(element_t* element, set_t** set) {
 	expand_set(element,* set);
 }
