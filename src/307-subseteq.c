@@ -5,9 +5,8 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
-void Cmd_subseteq(set_t *set1, set_t *set2) {
+bool Cmd_subseteq(set_t *set1, set_t *set2) {
     int count = 0;
     for (int i = 0; i < (int) set1->number_of_elements; i++) {
         int equals = false;
@@ -20,14 +19,12 @@ void Cmd_subseteq(set_t *set1, set_t *set2) {
             count++;
         }
         else {
-            printf("false\n");
-            return;
+            return false;
         }
     }
     if (set1->number_of_elements == set2->number_of_elements) {
-        printf("false\n");
-        return;
+        return false;
     }
 
-    printf("true\n");
+    return true;
 }
