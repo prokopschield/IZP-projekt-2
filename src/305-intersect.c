@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void Command_intersect (set_t *set1, set_t *set2) {
+void Cmd_intersect (set_t *set1, set_t *set2) {
     for (int i = 0; i < (int) set1->number_of_elements; i++) {
         for (int j = 0; j < (int) set2->number_of_elements; j++) {
             if (set1->elements[i] == set2->elements[j]) {
