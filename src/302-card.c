@@ -6,5 +6,5 @@
 #include <stdio.h>
 
 void Command_card (set_t *set) {
-    putchar(set->number_of_elements);
+    printf("%zu\n", set->number_of_elements);
 }
