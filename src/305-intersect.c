@@ -9,7 +9,7 @@
 void Command_intersect (set_t *set1, set_t *set2) {
     for (int i = 0; i < (int) set1->number_of_elements; i++) {
         for (int j = 0; j < (int) set2->number_of_elements; j++) {
-            if (strcmp((const char *) set1->elements[i]->str.data, (const char *) set2->elements[j]->str.data)) {
+            if (set1->elements[i] == set2->elements[j]) {
                 printf("%s ", set1->elements[i]->str.data);
             }
         }
