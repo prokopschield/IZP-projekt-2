@@ -6,6 +6,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void Command_equals (set_t *set1, set_t *set2) {
+void Cmd_equals (set_t *set1, set_t *set2) {
 
 }
