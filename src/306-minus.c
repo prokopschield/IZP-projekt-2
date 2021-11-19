@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void Command_minus (set_t *set1, set_t *set2) {
+void Cmd_minus (set_t *set1, set_t *set2) {
     for (int i = 0; i < (int)set1->number_of_elements; i++) {
         bool print = true;
         for (int j = 0; j < (int) set2->number_of_elements; j++) {
