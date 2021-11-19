@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void Command_union (set_t *set1, set_t *set2) {
+void Cmd_union (set_t *set1, set_t *set2) {
     for (int i = 0; i < (int)set1->number_of_elements; i++) {
         printf("%s ", set1->elements[i]->str.data);
     }
