@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void Command_subseteq(set_t *set1, set_t *set2) {
+void Cmd_subseteq(set_t *set1, set_t *set2) {
     int count = 0;
     for (int i = 0; i < (int) set1->number_of_elements; i++) {
         int equals = false;
