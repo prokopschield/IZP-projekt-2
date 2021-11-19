@@ -1,22 +1,30 @@
 #include <stdbool.h>
 
+typedef struct checksum_t {
+	size_t product;
+	size_t sum;
+} checksum_t;
+
 typedef struct element_t {
 	size_t uid;
 	string_t str;
 } element_t;
 
 typedef struct set_t {
+	checksum_t checksum;
 	size_t line;
 	size_t number_of_elements;
 	element_t** elements;
 } set_t;
 
 typedef struct pair_t {
+	checksum_t checksum;
 	element_t* left;
 	element_t* right;
 } pair_t;
 
 typedef struct rel_t {
+	checksum_t checksum;
 	size_t line;
 	size_t number_of_pairs;
 	pair_t** pairs;
