@@ -5,20 +5,12 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void Cmd_union (set_t *set1, set_t *set2) {
-    for (int i = 0; i < (int)set1->number_of_elements; i++) {
-        printf("%s ", set1->elements[i]->str.data);
-    }
 
+set_t* Cmd_union (set_t *set1, set_t *set2) {
+    set_t* setu = set1;
     for (int i = 0; i < (int)set2->number_of_elements; i++) {
-        bool print = true;
-        for (int j = 0; j < (int)set1->number_of_elements; j++) {
-        if (set2->elements[i] == set1->elements[j]) {
-                print = false;
-                break;
-            }
-        }
-        if (print)
-            printf("%s ", set2->elements[i]->str.data);
+        if (!is_element_in_set(set2->elements[i], setu))
+            expand_set(set2->elements[i], setu);
     }
+    return setu;
 }
