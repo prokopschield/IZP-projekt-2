@@ -89,6 +89,7 @@ mem_t* mem_alloc(size_t size) {
 }
 
 void mem_free(mem_t* mem) {
+	if (!mem) return;
 	mem_t* last = mem_last(NULL);
 	while (last->next) {
 		last = (mem_t*) last->next;
@@ -122,5 +123,6 @@ void mem_free_everything() {
 byte_t* buffer_alloc(size_t size) { return mem_alloc(size)->data; }
 
 void buffer_free(byte_t* buffer) {
+	if (!buffer) return;
 	mem_free((mem_t*)((size_t) buffer - header_size));
 }
