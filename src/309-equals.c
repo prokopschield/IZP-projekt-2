@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 bool Cmd_equals (set_t *set1, set_t *set2) {
-    if (Cmd_subset (set1, set2) && Cmd_subset (set2, set1))
+    if (set1 == set2)
         return true;
     else
         return false;
