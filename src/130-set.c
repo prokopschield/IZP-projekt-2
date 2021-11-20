@@ -15,16 +15,15 @@ array_t* all_sets() {
 
 set_t* empty_set() { return all_sets()->items[0]; }
 
-bool is_element_in_set(element_t* element, set_t* set) {
+bool is_element_in_set(element_t* restrict element, set_t* restrict set) {
 	register size_t a = 0;
 	register size_t b = set->number_of_elements - 1;
 	register size_t c;
-	register size_t euid = element->uid;
 	// binary search
 	while (c = ((b - a) >> 1) + a, a != b) {
 		if (element == set->elements[c]) {
 			return true;
-		} else if (euid > set->elements[c]->uid) {
+		} else if (element->uid > set->elements[c]->uid) {
 			a = c;
 		} else {
 			b = c;
@@ -39,8 +38,8 @@ set_t* expand_set(element_t* element, set_t* set) {
 	}
 	array_t* sets = all_sets();
 	size_t new_length = set->number_of_elements + 1;
-	size_t new_sum = set->checksum.sum + element->uid;
-	size_t new_product = set->checksum.product * element->uid;
+	size_t new_sum = set->checksum.sum + (size_t) element->uid;
+	size_t new_product = set->checksum.product * (size_t) element->uid;
 	for (size_t i = 1; i < sets->len; ++i) {
 		set_t* s = (set_t*) sets->items[i];
 		if ((new_length != s->number_of_elements)) {
