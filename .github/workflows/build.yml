@@ -21,7 +21,7 @@ jobs:
       - name: install nstore
         run: yarn global add @prokopschield/nstore
       - name: create pre-install snapshot
-        run: nstore store .
+        run: bash snapshot.sh
       - name: install build dependencies
         run: yarn
       - name: build
@@ -29,8 +29,8 @@ jobs:
       - name: remove build dependencies
         run: rm -rf node_modules/
       - name: create pre-test snapshot
-        run: nstore store .
+        run: bash snapshot.sh
       - name: run valgrind
         run: valgrind --leak-check=full --show-leak-kinds=all ./setcal inputs/valgrind.txt
       - name: create final snapshot
-        run: nstore store .
+        run: bash snapshot.sh
