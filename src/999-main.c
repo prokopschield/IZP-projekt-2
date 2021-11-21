@@ -16,5 +16,5 @@ int main(int argc, const char* restrict argv[]) {
 	fclose(input);
 	// Remember to free everything!!!
 	mem_free_everything();
-	return ret;
+    return ret;
 }
