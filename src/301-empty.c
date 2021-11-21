@@ -7,6 +7,5 @@
 bool Cmd_empty (set_t *set) {
     if (set->number_of_elements == 0)
         return true;
-    else
-        return false;
+    return false;
 }
