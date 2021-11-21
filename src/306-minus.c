@@ -17,7 +17,7 @@ set_t* Cmd_minus (set_t *set1, set_t *set2) {
             }
         }
         if (add)
-            add_element_to_set(element, &setm);
+            add_element_to_set(set1->elements[i], &setm);
     }
     return setm;
 }
