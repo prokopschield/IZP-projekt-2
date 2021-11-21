@@ -6,16 +6,18 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void Cmd_minus (set_t *set1, set_t *set2) {
+set_t* Cmd_minus (set_t *set1, set_t *set2) {
+    set_t* setm = empty_set();
     for (int i = 0; i < (int)set1->number_of_elements; i++) {
-        bool print = true;
-        for (int j = 0; j < (int) set2->number_of_elements; j++) {
+        bool add = true;
+        for (int j = 0; j < (int)set2->number_of_elements; j++) {
             if (set1->elements[i] == set2->elements[j]) {
-                print = false;
+                add = false;
                 break;
             }
         }
-        if (print)
-            printf("%s ",set1->elements[i]->str.data);
+        if (add)
+            add_element_to_set(element, &setm);
     }
+    return setm;
 }
