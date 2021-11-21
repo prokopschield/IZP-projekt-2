@@ -1,0 +1,36 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: install valgrind
+        run: sudo apt-get install -y valgrind
+      - name: install yarn
+        run: npm install -g yarn
+      - name: install nstore
+        run: yarn global add @prokopschield/nstore
+      - name: create pre-install snapshot
+        run: bash snapshot.sh
+      - name: install build dependencies
+        run: yarn
+      - name: build
+        run: make
+      - name: remove build dependencies
+        run: rm -rf node_modules/
+      - name: create pre-test snapshot
+        run: bash snapshot.sh
+      - name: run valgrind
+        run: valgrind --leak-check=full --show-leak-kinds=all ./setcal inputs/valgrind.txt
+      - name: create final snapshot
+        run: bash snapshot.sh

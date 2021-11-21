@@ -23,7 +23,8 @@ void mem_zero(size_t* p, size_t b) {
 
 void mem_init(mem_t** first) {
 	byte_t* buffer = malloc(mem_def_size);
-	if (!buffer) return;
+	if (!buffer)
+		return;
 	mem_zero((size_t*) buffer, mem_def_size);
 	*first = (mem_t*) buffer;
 	(*first)->self = buffer;
@@ -36,7 +37,8 @@ void mem_init(mem_t** first) {
 
 mem_t* mem_first() {
 	static mem_t* first = NULL;
-	if (!first) mem_init(&first);
+	if (!first)
+		mem_init(&first);
 	return first;
 }
 
@@ -49,9 +51,11 @@ mem_t* mem_new(mem_t* prev, size_t size) {
 	while (prev->next && ((mem_t*) prev->next != prev)) {
 		prev = (mem_t*) prev->next;
 	}
-	const size_t alloc_size = ((((size + mem_def_size - 1) >> sizeof(size_t)) + 1) << sizeof(size_t));
+	const size_t alloc_size =
+			((((size + mem_def_size - 1) >> sizeof(size_t)) + 1) << sizeof(size_t));
 	byte_t* buffer = malloc(alloc_size);
-	if (!buffer) return NULL;
+	if (!buffer)
+		return NULL;
 	mem_zero((size_t*) buffer, alloc_size);
 	mem_t* next = (mem_t*) buffer;
 	next->self = buffer;
@@ -66,7 +70,8 @@ mem_t* mem_new(mem_t* prev, size_t size) {
 
 mem_t* mem_alloc(size_t size) {
 	register mem_t* prev = mem_last(NULL);
-	if (!prev) return NULL; // mem_init() -> malloc() failed
+	if (!prev)
+		return NULL; // mem_init() -> malloc() failed
 	while (prev->len && prev->next) {
 		prev = (mem_t*) prev->next;
 	}
@@ -84,6 +89,8 @@ mem_t* mem_alloc(size_t size) {
 }
 
 void mem_free(mem_t* mem) {
+	if (!mem)
+		return;
 	mem_t* last = mem_last(NULL);
 	while (last->next) {
 		last = (mem_t*) last->next;
@@ -114,14 +121,10 @@ void mem_free_everything() {
 	free(scnd);
 }
 
-byte_t* buffer_alloc(size_t size) {
-	return mem_alloc(size)->data;
-}
+byte_t* buffer_alloc(size_t size) { return mem_alloc(size)->data; }
 
 void buffer_free(byte_t* buffer) {
-	mem_free(
-		(mem_t*) (
-			(size_t) buffer - header_size
-		)
-	);
+	if (!buffer)
+		return;
+	mem_free((mem_t*)((size_t) buffer - header_size));
 }
