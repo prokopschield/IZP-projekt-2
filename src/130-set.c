@@ -1,4 +1,4 @@
-garray_t* all_sets() {
+array_t* all_sets() {
 	static array_t* all_sets = NULL;
 	if (!all_sets) {
 		all_sets = arr_alloc(1);
