@@ -55,16 +55,15 @@ set_t* expand_set(element_t* element, set_t* set) {
 	// set does not exist already
 	register const size_t alloc_size = (sizeof(element_t*) * new_length);
 	element_t** element_list = (element_t**) buffer_alloc(alloc_size);
-	bool flag = false;
-	for (size_t i = 0; i < set->number_of_elements;) {
-		if (flag || (set->elements[i]->uid < element->uid)) {
-			element_list[i + flag] = set->elements[i];
-			++i;
-		} else {
-			element_list[i] = element;
-			flag = true;
-		}
+
+	// add element, sort by uid
+	for (size_t i_o = 0, i_n = 0; i_n < new_length; ++i_n) {
+		element_list[i_n] =
+				((i_o != i_n) || (element->uid > set->elements[i_o]->uid))
+						? set->elements[i_o++]
+						: element;
 	}
+
 	set_t* new_set = (set_t*) buffer_alloc(sizeof(set_t));
 	new_set->number_of_elements = new_length;
 	new_set->checksum.sum = new_sum;
