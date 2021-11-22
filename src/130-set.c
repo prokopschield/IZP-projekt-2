@@ -7,7 +7,7 @@ array_t* all_sets() {
 		empty_set->number_of_elements = 0;
 		empty_set->elements = NULL;
 		empty_set->checksum.sum = 0;
-		empty_set->checksum.product = 0;
+		empty_set->checksum.product = 1;
 		arr_push(all_sets, empty_set);
 	}
 	return all_sets;
