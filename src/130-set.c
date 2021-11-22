@@ -26,9 +26,9 @@ bool is_element_in_set(element_t* restrict element, set_t* restrict set) {
 		if (element == set->elements[c]) {
 			return true;
 		} else if (element->uid > set->elements[c]->uid) {
-			a = c;
+			a = c + 1;
 		} else {
-			b = c;
+			b = c - 1;
 		}
 	}
 	return element == set->elements[c];
