@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool Cmd_equals (set_t *set1, set_t *set2) {
+bool cmd_equals (set_t *set1, set_t *set2) {
     if (set1 == set2)
         return true;
     else
