@@ -6,20 +6,10 @@
 #include <stdio.h>
 
 bool Cmd_subset (set_t *set1, set_t *set2) {
-    int count = 0;
-    for (int i = 0; i < (int) set1->number_of_elements; i++) {
-        int equals = false;
-        for (int j = 0; j < (int) set2->number_of_elements; j++) {
-            if (set1->elements[i] == set2->elements[j]) {
-                equals = true;
-            }
-        }
-        if (equals) {
-            count++;
-        }
-        else {
-            return false;
-        }
-    }
-    return true;
+    if (set1 == set2)
+        return false;
+    else if (Cmd_subseteq(set1, set2))
+        return true;
+    else
+        return false;
 }
