@@ -91,17 +91,19 @@ mem_t* mem_alloc(size_t size) {
 void mem_free(mem_t* mem) {
 	if (!mem)
 		return;
-	mem_t* last = mem_last(NULL);
-	while (last->next) {
-		last = (mem_t*) last->next;
+	if (mem->next) {
+		mem_t* last = mem_last(NULL);
+		while (last->next) {
+			last = (mem_t*) last->next;
+		}
+		mem_t* prev = (mem_t*) mem->prev;
+		mem_t* next = (mem_t*) mem->next;
+		prev->next = (byte_t*) next;
+		next->prev = (byte_t*) prev;
+		last->next = (byte_t*) mem;
+		mem->prev = (byte_t*) last;
+		mem->next = NULL;
 	}
-	mem_t* prev = (mem_t*) mem->prev;
-	mem_t* next = (mem_t*) mem->next;
-	prev->next = (byte_t*) next;
-	next->prev = (byte_t*) prev;
-	last->next = (byte_t*) mem;
-	mem->prev = (byte_t*) last;
-	mem->next = NULL;
 	mem->len = 0;
 }
 
