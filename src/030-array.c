@@ -10,7 +10,8 @@ typedef struct array_t {
 
 array_t* arr_alloc(size_t size) {
 	array_t* arr = (array_t*) buffer_alloc(sizeof(array_t));
-	if (!arr) return NULL;
+	if (!arr)
+		return NULL;
 	arr->size = size;
 	arr->len = 0;
 	arr->items = (void**) buffer_alloc(size * sizeof(size_t));
@@ -36,7 +37,8 @@ bool arr_push(array_t* arr, void* item) {
 	}
 	size_t new_size = (((arr->size >> arr_align) + 1) << arr_align);
 	void** new_items = (void**) buffer_alloc(new_size * sizeof(size_t));
-	if (!new_items) return false;
+	if (!new_items)
+		return false;
 	for (size_t i = 0; i < arr->len; ++i) {
 		new_items[i] = arr->items[i];
 	}
@@ -46,6 +48,4 @@ bool arr_push(array_t* arr, void* item) {
 	return arr_push(arr, item);
 }
 
-void* arr_pop(array_t* arr) {
-	return arr->items[--arr->len];
-}
+void* arr_pop(array_t* arr) { return arr->items[--arr->len]; }
