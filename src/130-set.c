@@ -30,7 +30,7 @@ bool is_element_in_set(element_t* restrict element, set_t* restrict set) {
 		} else if (element->uid > set->elements[c]->uid) {
 			a = c + 1;
 		} else {
-			b = c - 1;
+			b = c ? (c - 1) : 0;
 		}
 	}
 	return element == set->elements[c];
