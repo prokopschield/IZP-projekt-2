@@ -16,6 +16,8 @@ array_t* all_sets() {
 set_t* empty_set() { return all_sets()->items[0]; }
 
 bool is_element_in_set(element_t* restrict element, set_t* restrict set) {
+	if (!set->number_of_elements)
+		return false;
 	register size_t a = 0;
 	register size_t b = set->number_of_elements - 1;
 	register size_t c;
