@@ -59,7 +59,8 @@ set_t* expand_set(element_t* element, set_t* set) {
 	// add element, sort by uid
 	for (size_t i_o = 0, i_n = 0; i_n < new_length; ++i_n) {
 		element_list[i_n] =
-				((i_o != i_n) || (element->uid > set->elements[i_o]->uid))
+				((i_o < set->number_of_elements) // empty set would segfault
+				 && ((i_o != i_n) || (element->uid > set->elements[i_o]->uid)))
 						? set->elements[i_o++]
 						: element;
 	}
