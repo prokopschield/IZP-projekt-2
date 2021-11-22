@@ -5,6 +5,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-int Cmd_card (set_t *set) {
+size_t Cmd_card (set_t *set) {
     return set->number_of_elements;
 }

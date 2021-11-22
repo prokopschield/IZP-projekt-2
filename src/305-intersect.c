@@ -7,7 +7,7 @@
 
 set_t* Cmd_intersect (set_t *set1, set_t *set2) {
     set_t* seti = empty_set();
-    for (int i = 0; i < (int) set1->number_of_elements; i++) {
+    for (size_t i = 0; i < set1->number_of_elements; i++) {
         if (is_element_in_set(set1->elements[i], set2)) {
             add_element_to_set(set1->elements[i], &seti);
         }
