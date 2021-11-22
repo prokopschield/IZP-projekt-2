@@ -20,6 +20,11 @@ void parse(array_t* error, set_t* universe, array_t* lines, FILE* input) {
 		line->line_type = line_type_rel;
 		break;
 	}
+	case 'C': {
+		line->val_cmd = parse_cmd(error, input, EOL);
+		line->line_type = line_type_cmd;
+		break;
+	}
 	default: {
 		char* e_str = (char*) buffer_alloc(MAX_ELEMENT_LENGTH + 24);
 		sprintf(e_str, "Unknown line type: '%s'", type_str.data);
