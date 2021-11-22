@@ -30,18 +30,52 @@ typedef struct rel_t {
 	pair_t** pairs;
 } rel_t;
 
+enum cmd_type_t {
+	cmd_empty = 0x01,
+	cmd_card,
+	cmd_complement,
+	cmd_union,
+	cmd_intersect,
+	cmd_minus,
+	cmd_subseteq,
+	cmd_subset,
+	cmd_equals,
+	cmd_reflexive = 0x21,
+	cmd_symmetric,
+	cmd_antisymmetric,
+	cmd_transitive,
+	cmd_function,
+	cmd_domain,
+	cmd_codomain,
+	cmd_injective,
+	cmd_surjective,
+	cmd_bijective,
+	cmd_closure_ref = 0x41,
+	cmd_closure_sym,
+	cmd_closure_trans,
+	cmd_select = 0x61,
+};
+
+typedef struct cmd_t {
+	set_t* A;
+	set_t* B;
+	rel_t* R;
+	size_t N;
+	byte_t cmd_type;
+} cmd_t;
+
 enum line_type_t {
 	line_type_undefined,
 	line_type_set,
 	line_type_rel,
+	line_type_cmd,
 	line_type_bool
-} line_type_t;
+};
 
 typedef struct line_t {
 	size_t line;
 	byte_t line_type;
 	set_t* val_set;
 	rel_t* val_rel;
-	bool val_bool;
-	string_t input;
+	cmd_t* val_cmd;
 } line_t;
