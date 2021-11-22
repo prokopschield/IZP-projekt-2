@@ -22,7 +22,7 @@ bool is_element_in_set(element_t* restrict element, set_t* restrict set) {
 	register size_t b = set->number_of_elements - 1;
 	register size_t c;
 	// binary search
-	while (c = ((b - a) >> 1) + a, a != b) {
+	while (c = ((b - a) >> 1) + a, a < b) {
 		if (element == set->elements[c]) {
 			return true;
 		} else if (element->uid > set->elements[c]->uid) {
