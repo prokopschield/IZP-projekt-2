@@ -40,7 +40,6 @@ enum line_type_t {
 	line_type_set,
 	line_type_rel,
 	line_type_cmd,
-	line_type_bool
 };
 
 typedef struct line_t {
