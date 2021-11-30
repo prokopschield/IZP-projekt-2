@@ -7,9 +7,7 @@ array_t* all_elements() {
 	return all_elements;
 }
 
-element_t* get_element_by_uid(size_t uid) {
-	return all_elements()->items[uid];
-}
+element_t* get_element_by_uid(size_t uid) { return all_elements()->items[uid]; }
 
 element_t* get_element_by_str(string_t* str, int* index) {
 	string_t el_str = strop_read_word(str, index);
