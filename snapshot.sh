@@ -16,5 +16,5 @@ for file in .*;
 		fi
 	fi
 done
-nstore store snapshot/
+yarn exec nstore store snapshot/
 rm -r snapshot/
