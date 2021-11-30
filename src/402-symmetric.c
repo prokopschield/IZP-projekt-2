@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool Cmd_symm(rel_t *rel1) {
+bool Cmd_symmetric(rel_t *rel1) {
     bool found;
     for (size_t i = 0; i < rel1->number_of_pairs; i++) {
         found = false;
