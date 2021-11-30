@@ -26,8 +26,6 @@ jobs:
         run: yarn
       - name: build
         run: make
-      - name: remove build dependencies
-        run: rm -rf node_modules/
       - name: create pre-test snapshot
         run: bash snapshot.sh
       - name: run valgrind
