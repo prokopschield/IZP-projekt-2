@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 bool Cmd_fun(rel_t *rel1){
-    if(rel_reflx(rel1) == true && rel_symm(rel1) == true && rel_tran(rel1) == true) {
+    if(Cmd_reflx(rel1) == true && Cmd_symm(rel1) == true && Cmd_tran(rel1) == true) {
         bool found;
         for (size_t i = 0; i < rel1->number_of_pairs; i++) {
             found = false;
