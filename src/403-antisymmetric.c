@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool Cmd_antisymm(rel_t *rel1){
+bool Cmd_antisymmetric(rel_t *rel1){
 
     bool x;
     for (size_t i = 0; i < rel1->number_of_pairs; i++) {
