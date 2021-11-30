@@ -35,6 +35,8 @@ bool Cmd_reflexive (rel_t* rel) {
             counter++;
     }
 
+    free(elements);
+
     if (num_of_els == counter)
         return true;
 
