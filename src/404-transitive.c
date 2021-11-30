@@ -12,7 +12,7 @@ bool find_pair(rel_t* rel1, element_t* left, element_t* right) {
     return false;
 }
 
-bool Cmd_tran(rel_t *rel1){
+bool Cmd_transitive(rel_t *rel1){
     bool found;
 
     for (size_t i = 0; i < rel1->number_of_pairs; i++) {
