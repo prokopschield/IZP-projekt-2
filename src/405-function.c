@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool Cmd_fun(rel_t *rel1){
+bool Cmd_function(rel_t *rel1){
     if(Cmd_reflx(rel1) == true && Cmd_symm(rel1) == true && Cmd_tran(rel1) == true) {
         bool found;
         for (size_t i = 0; i < rel1->number_of_pairs; i++) {
