@@ -43,6 +43,11 @@ async function process_file(file) {
 }
 
 async function go_through_files() {
+	for (const file of process.argv.slice(2)) {
+		await process_file(file).catch((error) => {
+			console.error(error);
+		});
+	}
 	const files = await new Promise((resolve) =>
 		exec('git diff --name-only', (error, stdout, stderr) => {
 			resolve(stdout.toString());
