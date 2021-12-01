@@ -5,19 +5,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool Cmd_symmetric(rel_t *rel1) {
-    bool found;
-    for (size_t i = 0; i < rel1->number_of_pairs; i++) {
-        found = false;
-        for (size_t j = i; j < rel1->number_of_pairs; j++) {
-            if (rel1->pairs[i]->left == rel1->pairs[j]->right && rel1->pairs[i]->right == rel1->pairs[j]->left) {
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
+bool Cmd_symmetric(rel_t *rel) {
+    for (size_t i = 0; i < rel->number_of_pairs; i++) {
+        if (!is_pair_in_rel(get_pair(rel->pairs[i]->right, rel->pairs[i]->left), rel))
             return false;
-        }
     }
     return true;
 }
