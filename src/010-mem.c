@@ -14,18 +14,18 @@ typedef struct mem_t {
 const size_t header_size = sizeof(mem_t);
 const size_t mem_def_size = header_size << 1;
 
-void mem_zero(size_t* p, size_t b) {
-	register size_t n = b / sizeof(size_t);
-	for (size_t i = 0; i < n; ++i) {
-		p[i] = 0L;
+static inline void* mem_alloc_real(size_t size) {
+	void* mem = calloc(size, 1);
+	if (!mem) {
+		throw(error.malloc);
 	}
+	return mem;
 }
 
 void mem_init(mem_t** first) {
-	byte_t* buffer = malloc(mem_def_size);
+	byte_t* buffer = mem_alloc_real(mem_def_size);
 	if (!buffer)
 		return;
-	mem_zero((size_t*) buffer, mem_def_size);
 	*first = (mem_t*) buffer;
 	(*first)->self = buffer;
 	(*first)->next = NULL;
@@ -53,10 +53,9 @@ mem_t* mem_new(mem_t* prev, size_t size) {
 	}
 	const size_t alloc_size =
 			((((size + mem_def_size - 1) >> sizeof(size_t)) + 1) << sizeof(size_t));
-	byte_t* buffer = malloc(alloc_size);
+	byte_t* buffer = mem_alloc_real(alloc_size);
 	if (!buffer)
 		return NULL;
-	mem_zero((size_t*) buffer, alloc_size);
 	mem_t* next = (mem_t*) buffer;
 	next->self = buffer;
 	next->next = NULL;
