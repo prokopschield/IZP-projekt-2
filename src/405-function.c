@@ -4,24 +4,14 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool Cmd_function(rel_t *rel1){
-    if(Cmd_reflexive(rel1) == true && Cmd_symmetric(rel1) == true && Cmd_transitive(rel1) == true) {
-        bool found;
-        for (size_t i = 0; i < rel1->number_of_pairs; i++) {
-            found = false;
-            for (size_t j = 0; j < rel1->number_of_pairs; j++) {
-                if (rel1->pairs[i]->left == rel1->pairs[j]->left && rel1->pairs[i]->right != rel1->pairs[j]->right) {
-                    found = true;
-                    break;
-                }
-            }
-            if(found) {
-                return false;
+bool Cmd_function(rel_t *rel, set_t* universe){
+    for (size_t i = 0; i < rel->number_of_pairs; i++) {
+        for (size_t j = 0; j < universe->number_of_elements; j++) {
+            if (rel->pairs[i]->right != universe->elements[j]) {
+                if (is_pair_in_rel(get_pair(rel->pairs[i]->left, universe->elements[j]), rel))
+                    return false;
             }
         }
-        return true;
     }
-    else{
-        return false;
-    }
+    return true;
 }
