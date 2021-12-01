@@ -3,9 +3,9 @@
 typedef unsigned char byte_t;
 
 typedef struct mem_t {
-	byte_t* self;
-	byte_t* next;
-	byte_t* prev;
+	struct mem_t* self;
+	struct mem_t* next;
+	struct mem_t* prev;
 	size_t size;
 	size_t len;
 	byte_t* data;
@@ -14,25 +14,25 @@ typedef struct mem_t {
 const size_t header_size = sizeof(mem_t);
 const size_t mem_def_size = header_size << 1;
 
-void mem_zero(size_t* p, size_t b) {
-	register size_t n = b / sizeof(size_t);
-	for (size_t i = 0; i < n; ++i) {
-		p[i] = 0L;
+static inline void* mem_alloc_real(size_t size) {
+	void* mem = calloc(size, 1);
+	if (!mem) {
+		throw(error.malloc);
 	}
+	return mem;
 }
 
-void mem_init(mem_t** first) {
-	byte_t* buffer = malloc(mem_def_size);
-	if (!buffer)
+static inline void mem_init(mem_t** first) {
+	register mem_t* mem = mem_alloc_real(mem_def_size);
+	if (!mem)
 		return;
-	mem_zero((size_t*) buffer, mem_def_size);
-	*first = (mem_t*) buffer;
-	(*first)->self = buffer;
-	(*first)->next = NULL;
-	(*first)->prev = NULL;
-	(*first)->size = header_size;
-	(*first)->len = header_size;
-	(*first)->data = NULL;
+	mem->self = mem;
+	mem->next = NULL;
+	mem->prev = NULL;
+	mem->size = header_size;
+	mem->len = header_size;
+	mem->data = NULL;
+	*first = mem;
 }
 
 mem_t* mem_first() {
@@ -53,18 +53,16 @@ mem_t* mem_new(mem_t* prev, size_t size) {
 	}
 	const size_t alloc_size =
 			((((size + mem_def_size - 1) >> sizeof(size_t)) + 1) << sizeof(size_t));
-	byte_t* buffer = malloc(alloc_size);
-	if (!buffer)
+	mem_t* next = mem_alloc_real(alloc_size);
+	if (!next)
 		return NULL;
-	mem_zero((size_t*) buffer, alloc_size);
-	mem_t* next = (mem_t*) buffer;
-	next->self = buffer;
+	next->self = next;
 	next->next = NULL;
 	next->size = size;
 	next->len = size;
 	next->data = (byte_t*) next + header_size;
-	next->prev = (byte_t*) prev;
-	prev->next = (byte_t*) next;
+	next->prev = prev;
+	prev->next = next;
 	return next;
 }
 
@@ -94,14 +92,14 @@ void mem_free(mem_t* mem) {
 	if (mem->next) {
 		mem_t* last = mem_last(NULL);
 		while (last->next) {
-			last = (mem_t*) last->next;
+			last = last->next;
 		}
-		mem_t* prev = (mem_t*) mem->prev;
-		mem_t* next = (mem_t*) mem->next;
-		prev->next = (byte_t*) next;
-		next->prev = (byte_t*) prev;
-		last->next = (byte_t*) mem;
-		mem->prev = (byte_t*) last;
+		mem_t* prev = mem->prev;
+		mem_t* next = mem->next;
+		prev->next = next;
+		next->prev = prev;
+		last->next = mem;
+		mem->prev = last;
 		mem->next = NULL;
 	}
 	mem->len = 0;
