@@ -5,24 +5,11 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool Cmd_antisymmetric(rel_t *rel1){
-
-    bool x;
-    for (size_t i = 0; i < rel1->number_of_pairs; i++) {
-        x = false;
-        if (rel1->pairs[i]->left == rel1->pairs[i]->right) {
-            x = true;
-        }
-        else {
-            for (size_t j = i; j < rel1->number_of_pairs; j++) {
-                if ((rel1->pairs[i]->left == rel1->pairs[j]->right && rel1->pairs[i]->right == rel1->pairs[j]->left)) {
-                    x = false;
-                    break;
-                }
-            }
-        }
-        if (!x) {
-            return false;
+bool Cmd_antisymmetric(rel_t *rel){
+    for (size_t i = 0; i < rel->number_of_pairs; i++) {
+        if (!(rel->pairs[i]->left == rel->pairs[i]->right)) {
+            if (is_pair_in_rel(get_pair(rel->pairs[i]->right, rel->pairs[i]->left), rel))
+                return false;
         }
     }
     return true;
