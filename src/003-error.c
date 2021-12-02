@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 
 typedef struct error_t {
 	bool any;
@@ -8,3 +9,5 @@ typedef struct error_t {
 error_t error = { false, false };
 
 #define throw(e)(e = error.any = true)
+#define throw_error(format, ...)																							 \
+	((error.any = true), fprintf(stderr, "Error :: " format "\n", __VA_ARGS__))
