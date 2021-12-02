@@ -21,9 +21,16 @@ string_t strop_read_word(string_t* restrict str, int* index) {
 		++l;
 	}
 	string_t substr = str_alloc(l);
-	for (int j = 0; j < l; ++j) {
-		substr.data[j] = str->data[(*index)++];
+
+	// only proceed if allocation has not failed
+	if (substr.len) {
+		for (int j = 0; j < l; ++j) {
+			substr.data[j] = str->data[(*index)++];
+		}
+	} else {
+		throw_error("Could not allocate substr '%s'", &str->data[*index]);
 	}
+
 	strop_skip_ws(str, index);
 	return substr;
 }
