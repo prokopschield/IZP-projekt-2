@@ -34,6 +34,10 @@ void arr_free(array_t* arr) {
 }
 
 bool arr_push(array_t* arr, void* item) {
+	if (!arr) {
+		throw_error("Cannot push %p to NULL array.", item);
+		return false;
+	}
 	if (arr->len < arr->size) {
 		arr->items[arr->len++] = item;
 		return true;
