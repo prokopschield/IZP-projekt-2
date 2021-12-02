@@ -121,7 +121,15 @@ void mem_free_everything() {
 	free(scnd);
 }
 
-byte_t* buffer_alloc(size_t size) { return mem_alloc(size)->data; }
+byte_t* buffer_alloc(size_t size) {
+	mem_t* mem = mem_alloc(size);
+	if (mem) {
+		return mem->data;
+	} else {
+		throw(error.malloc);
+		return NULL;
+	}
+}
 
 void buffer_free(byte_t* buffer) {
 	if (!buffer)
