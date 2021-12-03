@@ -13,6 +13,10 @@ string_t read_word(FILE* stream, bool* EOL) {
 		buffer[length] = 0; // null-terminate string
 	} while (!length && !feof(stream));
 	string_t str = str_alloc(length);
+	if (!str.len) {
+		throw_error("Could not read word '%s'", buffer);
+		return str;
+	}
 	for (int i = 0; i <= length; ++i) {
 		str.data[i] = buffer[i];
 	}
