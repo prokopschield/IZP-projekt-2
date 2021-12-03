@@ -8,6 +8,12 @@ typedef struct array_t {
 	void** items;
 } array_t;
 
+typedef struct size_t_array_t {
+	size_t size;
+	size_t len;
+	size_t* items;
+} size_t_array_t;
+
 array_t* arr_alloc(size_t size) {
 	array_t* arr = (array_t*) buffer_alloc(sizeof(array_t));
 	if (!arr) {
