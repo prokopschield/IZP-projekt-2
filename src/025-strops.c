@@ -11,8 +11,7 @@ void strop_skip_ws(string_t* restrict str, int* index) {
 	if (*index > len) {
 		*index = 0;
 	}
-	while ((c = str->data[*index]),
-				 (c == ' ' || c == '\t' || c == '\r' || c == '\n')) {
+	while ((c = str->data[*index]),  (c == ' ' || c == '\t' || c == '\r' || c == '\n')) {
 		if (++(*index) >= len) {
 			*index = EOF;
 			return;
