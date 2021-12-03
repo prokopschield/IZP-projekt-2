@@ -9,6 +9,11 @@ typedef struct string_t {
 
 string_t str_alloc(size_t len) {
 	mem_t* mem = mem_alloc(len + 1);
+	if (!mem) {
+		throw_error("Failed to allocate string of length %ld.", len);
+		string_t str = { NULL, 0, NULL };
+		return str;
+	}
 	byte_t* data = mem->data;
 	string_t str = { mem, len, data };
 	return str;
@@ -16,6 +21,10 @@ string_t str_alloc(size_t len) {
 
 string_t* str_palloc(size_t len) {
 	mem_t* mem = mem_alloc(len + sizeof(string_t) + 1);
+	if (!mem) {
+		throw_error("Failed to allocate string of length %ld.", len);
+		return NULL;
+	}
 	string_t* str = (string_t*) mem->data;
 	str->mem = mem;
 	str->len = len;

@@ -2,8 +2,15 @@
 #include <stdio.h>
 
 void strop_skip_ws(string_t* restrict str, int* index) {
+	if (!str || !str->len || !str->data) {
+		throw_error("Trying to read empty string %p [%d]", (void*) str, *index);
+		return;
+	}
 	register byte_t c;
 	register const int len = (int) str->len;
+	if (*index > len) {
+		*index = 0;
+	}
 	while ((c = str->data[*index]),
 				 (c == ' ' || c == '\t' || c == '\r' || c == '\n')) {
 		if (++(*index) >= len) {
@@ -14,6 +21,11 @@ void strop_skip_ws(string_t* restrict str, int* index) {
 }
 
 string_t strop_read_word(string_t* restrict str, int* index) {
+	if (!str || !str->len || !str->data) {
+		throw_error("Trying to read empty string %p [%d]", (void*) str, *index);
+		register string_t ret = { NULL, 0, NULL };
+		return ret;
+	}
 	strop_skip_ws(str, index);
 	int i = *index;
 	int l = 0;
@@ -21,9 +33,16 @@ string_t strop_read_word(string_t* restrict str, int* index) {
 		++l;
 	}
 	string_t substr = str_alloc(l);
-	for (int j = 0; j < l; ++j) {
-		substr.data[j] = str->data[(*index)++];
+
+	// only proceed if allocation has not failed
+	if (substr.len) {
+		for (int j = 0; j < l; ++j) {
+			substr.data[j] = str->data[(*index)++];
+		}
+	} else {
+		throw_error("Could not allocate substr '%s'", &str->data[*index]);
 	}
+
 	strop_skip_ws(str, index);
 	return substr;
 }
