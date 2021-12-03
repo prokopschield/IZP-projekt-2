@@ -1,4 +1,8 @@
 int process(FILE* input, FILE* output) {
+	if (!empty_set() || !empty_rel()) {
+		throw_error("Empty set/rel allocation failed. [%p, %p]", (void*) empty_set(), (void*) empty_rel());
+		return EXIT_FAILURE;
+	}
 	array_t lines = { 0, 0, NULL };
 	line_t line_zero = { 0, line_type_set, empty_set(), NULL, NULL };
 	arr_push(&lines, &line_zero);

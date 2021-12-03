@@ -11,7 +11,7 @@ void parse(array_t* error, set_t* universe, array_t* lines, FILE* input) {
 	switch (type_str.data[0]) {
 	case 'U':
 	case 'S': {
-		line->val_set = parse_set(error, universe, input, EOL);
+		line->val_set = parse_set(universe, input, EOL);
 		line->line_type = line_type_set;
 		break;
 	}
