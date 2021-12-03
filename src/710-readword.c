@@ -2,7 +2,12 @@ string_t read_word(FILE* stream, bool* EOL) {
 	static int length = 0;
 	static char buffer[READ_BUFFER_LENGTH] = { 0 };
 	do {
-		while ((buffer[length++] = getc(stream)) > ' ');
+		while ((buffer[length++] = getc(stream)) > ' ') {
+			if (length > MAX_ELEMENT_LENGTH) {
+				throw_error("Element %s is longer than %d chars.", buffer, MAX_ELEMENT_LENGTH);
+				break;
+			}
+		}
 		if (buffer[--length] == '\n')
 			*EOL = true;
 		buffer[length] = 0; // null-terminate string
