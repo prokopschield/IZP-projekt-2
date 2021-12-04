@@ -8,10 +8,12 @@ int process(FILE* input, FILE* output) {
 	arr_push(&lines, &line_zero);
 	size_t line_i = 1;
 	while (!error.any && (!feof(input) || (line_i < lines.len))) {
-		while (line_i >= lines.len) {
+		while (!error.any && (line_i >= lines.len)) {
 			parse(lines.len > 1 ? (((line_t*) lines.items[1])->val_set) : NULL, &lines, input);
 		}
-		execute(&lines, &line_i, output);
+		if (!error.any) {
+			execute(&lines, &line_i, output);
+		}
 	}
 	if (error.malloc) {
 		throw_chars("Memory allocation error.\n");
