@@ -1,13 +1,9 @@
 extern line_t* line_init(array_t* lines);
 
-array_t* line_array_init() {
-	array_t* lines = arr_alloc(1);
-	if (!lines) {
-		throw(error.malloc);
-		return NULL;
-	}
+array_t line_array_init() {
+	array_t lines = { 0, 0, NULL };
 
-	line_t* line_zero = line_init(lines);
+	line_t* line_zero = line_init(&lines);
 	if (!line_zero) {
 		throw(error.malloc);
 		return lines;
