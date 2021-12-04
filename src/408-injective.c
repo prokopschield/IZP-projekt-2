@@ -22,6 +22,6 @@ bool cmd_injective(rel_t *rel,set_t *set1,set_t *set2){
     if (set1->number_of_elements != setleft->number_of_elements ){
         return false;
     }
-  
+
     return true;
 }
