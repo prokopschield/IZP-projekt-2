@@ -21,7 +21,7 @@ void parse(array_t* error, set_t* universe, array_t* lines, FILE* input) {
 		break;
 	}
 	case 'C': {
-		line->val_cmd = parse_cmd(error, input, EOL);
+		line->val_cmd = parse_cmd(input, EOL);
 		line->line_type = line_type_cmd;
 		break;
 	}
