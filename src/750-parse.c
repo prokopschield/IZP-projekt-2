@@ -2,11 +2,7 @@ void parse(set_t* universe, array_t* lines, FILE* input) {
 	bool EOL = false;
 	const string_t type_str = read_word(input, &EOL);
 
-	line_t* line = (line_t*) buffer_alloc(sizeof(line_t));
-	line->line = lines->len;
-	line->val_set = NULL;
-	line->val_rel = NULL;
-	line->val_cmd = NULL;
+	line_t* line = line_init(lines);
 
 	switch (type_str.data[0]) {
 	case 'U':
@@ -27,6 +23,4 @@ void parse(set_t* universe, array_t* lines, FILE* input) {
 	}
 	default: { throw_error("Unknown line type: '%s'", type_str.data); }
 	}
-
-	arr_push(lines, line);
 }
