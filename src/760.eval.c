@@ -32,6 +32,13 @@ evaled_t eval(array_t* lines, line_t* line) {
 					ret.s = cmd_empty(a.A) ? "true" : "false";
 					return ret;
 				}
+			} else if (!strcmp(cmd_s, "card")) {
+				arg_A_t a = { NULL, 0 };
+				if (arg_A_val(&a, lines, args)) {
+					ret.u = true;
+					ret.n = (long long int) cmd_card(a.A);
+					return ret;
+				}
 			}
 		}
 	}
