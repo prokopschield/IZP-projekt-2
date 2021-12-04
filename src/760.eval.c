@@ -39,6 +39,12 @@ evaled_t eval(array_t* lines, line_t* line) {
 					ret.n = (long long int) cmd_card(a.A);
 					return ret;
 				}
+			} else if (!strcmp(cmd_s, "complement")) {
+				arg_A_t a = { NULL, 0 };
+				if (arg_A_val(&a, lines, args)) {
+					line->val_set = cmd_complement(get_universe(lines), a.A);
+					return ret;
+				}
 			}
 		}
 	}
