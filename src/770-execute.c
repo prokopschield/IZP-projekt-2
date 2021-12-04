@@ -17,6 +17,10 @@ void execute(array_t* lines, size_t* line_i, FILE* output) {
 		line_print(line, output);
 	}
 	if (!error.any) {
-		++*line_i;
+		if (evaled.N) {
+			*line_i = evaled.N;
+		} else {
+			++*line_i;
+		}
 	}
 }
