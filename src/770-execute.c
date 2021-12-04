@@ -1,4 +1,4 @@
-void execute(array_t* error, array_t* lines, size_t* line_i, FILE* output) {
+void execute(array_t* lines, size_t* line_i, FILE* output) {
 	line_t* line = lines->items[*line_i];
 	// const bool bval = line->val_cmd && eval(error, lines->items[1], line);
 	if (line->val_set) {
@@ -13,7 +13,7 @@ void execute(array_t* error, array_t* lines, size_t* line_i, FILE* output) {
 		fputc('\n', output);
 		// fputs(bval ? "true\n" : "false\n", output);
 	}
-	if (!error->len) {
+	if (!error.any) {
 		++*line_i;
 	}
 }

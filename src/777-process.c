@@ -12,7 +12,7 @@ int process(FILE* input, FILE* output) {
 		while (line_i >= lines.len) {
 			parse(&error, lines.len > 1 ? (((line_t*) lines.items[1])->val_set) : NULL, &lines, input);
 		}
-		execute(&error, &lines, &line_i, output);
+		execute(&lines, &line_i, output);
 	}
 	if (error.len) {
 		for (size_t i = 0; i < error.len; ++i) {
