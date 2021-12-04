@@ -10,7 +10,7 @@ int process(FILE* input, FILE* output) {
 	size_t line_i = 1;
 	while (!error.len && (!feof(input) || (line_i < lines.len))) {
 		while (line_i >= lines.len) {
-			parse(&error, lines.len > 1 ? (((line_t*) lines.items[1])->val_set) : NULL, &lines, input);
+			parse(lines.len > 1 ? (((line_t*) lines.items[1])->val_set) : NULL, &lines, input);
 		}
 		execute(&lines, &line_i, output);
 	}

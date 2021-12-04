@@ -1,4 +1,4 @@
-void parse(array_t* error, set_t* universe, array_t* lines, FILE* input) {
+void parse(set_t* universe, array_t* lines, FILE* input) {
 	bool EOL = false;
 	const string_t type_str = read_word(input, &EOL);
 
@@ -26,9 +26,7 @@ void parse(array_t* error, set_t* universe, array_t* lines, FILE* input) {
 		break;
 	}
 	default: {
-		char* e_str = (char*) buffer_alloc(MAX_ELEMENT_LENGTH + 24);
-		sprintf(e_str, "Unknown line type: '%s'", type_str.data);
-		arr_push(error, e_str);
+		throw_error("Unknown line type: '%s'", type_str.data);
 	}
 	}
 
