@@ -107,6 +107,11 @@ void mem_free(mem_t* mem) {
 
 void mem_free_everything() {
 	register mem_t* frst = mem_first();
+	if (!frst) {
+		// allocation of first chunk failed
+		throw(error.malloc);
+		return;
+	}
 	register mem_t* scnd = (mem_t*) frst->next;
 	if (!scnd) {
 		free(frst);
