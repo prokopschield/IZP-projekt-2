@@ -18,7 +18,7 @@ cmd_t* parse_cmd(FILE* input, bool EOL) {
 		}
 		signed long long int n = 0;
 		size_t r = sscanf((char*) str.data, "%lld", &n);
-		if ((r != str.len) || (n <= 0)) {
+		if (!r || (n <= 0)) {
 			throw_chars("Invalid command parameter(s).\n");
 			throw_error("The following is not a natural number: %s", str.data);
 		}
