@@ -7,3 +7,7 @@ R (dad boy) (dad girl) (mom boy) (mom girl)
 R (dad man) (boy man) (mom woman) (girl woman)
 C codomain 6
 C function 7
+S mom
+S 
+C empty 10
+C empty 11
