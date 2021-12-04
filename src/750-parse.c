@@ -6,21 +6,21 @@ void parse(set_t* universe, array_t* lines, FILE* input) {
 
 	switch (type_str.data[0]) {
 	case 'U':
-	case 'S': {
+	case 'S':
 		line->val_set = parse_set(universe, input, EOL);
 		line->line_type = line_type_set;
 		break;
-	}
-	case 'R': {
+
+	case 'R':
 		line->val_rel = parse_rel(universe, input, EOL);
 		line->line_type = line_type_rel;
 		break;
-	}
-	case 'C': {
+
+	case 'C':
 		line->val_cmd = parse_cmd(input, EOL);
 		line->line_type = line_type_cmd;
 		break;
-	}
-	default: { throw_error("Unknown line type: '%s'", type_str.data); }
+	default:
+		throw_error("Unknown line type: '%s'", type_str.data);
 	}
 }
