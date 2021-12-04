@@ -1,6 +1,6 @@
 void parse(set_t* universe, array_t* lines, FILE* input) {
 	bool EOL = false;
-	const string_t type_str = read_word(input, &EOL);
+	string_t type_str = read_word(input, &EOL);
 
 	line_t* line = line_init(lines);
 	if (!line) {
@@ -27,4 +27,6 @@ void parse(set_t* universe, array_t* lines, FILE* input) {
 	default:
 		throw_error("Unknown line type: '%s'", type_str.data);
 	}
+
+	str_free(&type_str);
 }
