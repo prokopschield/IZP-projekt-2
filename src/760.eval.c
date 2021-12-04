@@ -29,8 +29,12 @@ evaled_t eval(array_t* lines, line_t* line) {
 			if (!strcmp(cmd_s, "empty")) {
 				arg_A_t a = { NULL, 0 };
 				if (arg_A_val(&a, lines, args)) {
-					ret.u = true;
-					ret.s = cmd_empty(a.A) ? "true" : "false";
+					if (cmd_empty(a.A)) {
+						ret.s = "true";
+					} else {
+						ret.s = "false";
+						ret.N = a.N;
+					}
 					return ret;
 				}
 			} else if (!strcmp(cmd_s, "card")) {
