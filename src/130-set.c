@@ -48,7 +48,7 @@ bool is_element_in_set(element_t* restrict element, set_t* restrict set) {
 }
 
 set_t* expand_set(element_t* element, set_t* set) {
-	if (is_element_in_set(element, set) || !element) {
+	if (!element || is_element_in_set(element, set)) {
 		return set;
 	}
 	array_t* sets = all_sets();
