@@ -4,9 +4,10 @@
 set_t* get_universe(array_t* lines);
 
 typedef struct evaled_t {
-	bool u; // use flag
+	size_t N; // goto line
 	long long int n;
 	char* s;
+	bool u; // use flag
 } evaled_t;
 
 extern evaled_t eval(array_t* lines, line_t* line);
@@ -19,7 +20,7 @@ typedef struct arg_A_t {
 extern bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args);
 
 evaled_t eval(array_t* lines, line_t* line) {
-	evaled_t ret = { 0, 0, NULL };
+	evaled_t ret = { 0, 0, NULL, 0 };
 	if ((line->line_type == line_type_cmd) && line->val_cmd) {
 		cmd_t* cmd = line->val_cmd;
 		char* cmd_s = (char*) cmd->cmd.data;
@@ -86,6 +87,9 @@ bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args) {
 	}
 	eval(lines, arg_1);
 	res->A = arg_1->val_set ? arg_1->val_set : (set_t*) arg_1->val_rel;
+	if (args->len >= 2) {
+		res->N = args->items[1];
+	}
 	if (res->A) {
 		return true;
 	} else {
