@@ -1,24 +1,6 @@
 #include <stdbool.h>
 #include <string.h>
 
-set_t* get_universe(array_t* lines);
-
-typedef struct evaled_t {
-	size_t N; // goto line
-	long long int n;
-	char* s;
-	bool u; // use flag
-} evaled_t;
-
-extern evaled_t eval(array_t* lines, line_t* line);
-
-typedef struct arg_A_t {
-	set_t* A;
-	size_t N;
-} arg_A_t;
-
-extern bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args);
-
 evaled_t eval(array_t* lines, line_t* line) {
 	evaled_t ret = { 0, 0, NULL, 0 };
 	if ((line->line_type == line_type_cmd) && line->val_cmd) {
