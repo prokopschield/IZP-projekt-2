@@ -17,13 +17,14 @@ char* eval(array_t* lines, line_t* line) {
 		cmd_t* cmd = line->val_cmd;
 		char* cmd_s = (char*) cmd->cmd.data;
 		size_t_array_t* args = (size_t_array_t*) cmd->args;
-		if (args->len)
+		if (args->len) {
 			if (!strcmp(cmd_s, "empty")) {
 				arg_A_t a = { NULL, 0 };
 				if (arg_A_val(&a, lines, args)) {
 					return cmd_empty(a.A) ? "true" : "false";
 				}
 			}
+		}
 	}
 	return NULL;
 }
