@@ -42,3 +42,23 @@ line_t* line_get(array_t* lines, size_t n) {
 		return NULL;
 	}
 }
+
+void line_print(line_t* line, FILE* stream) {
+	if (!line) {
+		putc('\n', stream);
+	} else if (line->val_rel) {
+		rel_print(line->val_rel, stream, 0);
+	} else if (line->val_set) {
+		set_print(line->val_set, stream, line->line == 1);
+	} else if (line->val_cmd) {
+		fputs("C ", stream);
+		str_print(&line->val_cmd->cmd, stream);
+		size_t_array_t* args = (size_t_array_t*) line->val_cmd->args;
+		for (size_t i = 0; i < args->len; ++i) {
+			fprintf(stream, " %ld", args->items[i]);
+		}
+		fputc('\n', stream);
+	} else {
+		putc('\n', stream);
+	}
+}
