@@ -25,9 +25,7 @@ void parse(set_t* universe, array_t* lines, FILE* input) {
 		line->line_type = line_type_cmd;
 		break;
 	}
-	default: {
-		throw_error("Unknown line type: '%s'", type_str.data);
-	}
+	default: { throw_error("Unknown line type: '%s'", type_str.data); }
 	}
 
 	arr_push(lines, line);
