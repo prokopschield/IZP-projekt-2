@@ -13,7 +13,7 @@ rel_t* cmd_closure_sym(rel_t* rel) {
         pair_t *pair = get_pair(rel->pairs[i]->right, rel->pairs[i]->left);
         if (pair == NULL) {
             throw_chars("could not allocate memory for pair\n");
-            return false;
+            return NULL;
         }
         if (!is_pair_in_rel(pair, rel))
             add_pair_to_rel(pair, &sym_rel);
