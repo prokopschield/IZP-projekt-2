@@ -16,7 +16,7 @@ void parse(array_t* error, set_t* universe, array_t* lines, FILE* input) {
 		break;
 	}
 	case 'R': {
-		line->val_rel = parse_rel(error, universe, input, EOL);
+		line->val_rel = parse_rel(universe, input, EOL);
 		line->line_type = line_type_rel;
 		break;
 	}

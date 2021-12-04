@@ -33,6 +33,9 @@ string_t* str_palloc(size_t len) {
 }
 
 void str_free(string_t* str) {
+	if (!str) {
+		return;
+	}
 	register mem_t* mem = str->mem;
 	str->mem = NULL;
 	str->len = 0;
