@@ -6,12 +6,7 @@ void execute(array_t* lines, size_t* line_i, FILE* output) {
 	} else if (line->val_rel) {
 		rel_print(line->val_rel, output, 0);
 	} else {
-		str_print(&line->val_cmd->cmd, output);
-		for (size_t i = 0; i < line->val_cmd->args->len; ++i) {
-			fprintf(output, " %ld", (long int) line->val_cmd->args->items[i]);
-		}
-		fputc('\n', output);
-		// fputs(bval ? "true\n" : "false\n", output);
+		line_print(line, output);
 	}
 	if (!error.any) {
 		++*line_i;
