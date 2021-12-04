@@ -15,3 +15,11 @@ typedef struct arg_A_t {
 } arg_A_t;
 
 extern bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args);
+
+typedef struct arg_AB_t {
+	set_t* A;
+	set_t* B;
+	size_t N;
+} arg_AB_t;
+
+extern bool arg_AB_val(arg_AB_t* res, array_t* lines, size_t_array_t* args);
