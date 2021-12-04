@@ -38,11 +38,6 @@ evaled_t eval(array_t* lines, line_t* line) {
 	return ret;
 }
 
-void invalid_argument(line_t* line) {
-	throw_chars("Invalid argument: ");
-	line_print(line, stderr);
-}
-
 bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args) {
 	if (args->len < 1) {
 		throw_error("Insufficient (%ld) arguments for empty()", args->len);
