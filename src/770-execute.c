@@ -4,9 +4,11 @@ void execute(array_t* lines, size_t* line_i, FILE* output) {
 		throw_error("Line %ld not loadable for some reason!", *line_i);
 		return;
 	}
-	char* txtval = eval(lines, line);
-	if (txtval) {
-		fprintf(output, "%s\n", txtval);
+	evaled_t evaled = eval(lines, line);
+	if (evaled.s) {
+		fprintf(output, "%s\n", evaled.s);
+	} else if (evaled.n) {
+		fprintf(output, "%lld\n", evaled.n);
 	} else if (line->val_set) {
 		set_print(line->val_set, output, *line_i == 1);
 	} else if (line->val_rel) {

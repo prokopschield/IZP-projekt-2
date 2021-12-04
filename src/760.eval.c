@@ -3,7 +3,13 @@
 
 set_t* get_universe(array_t* lines);
 
-extern char* eval(array_t* lines, line_t* line);
+typedef struct evaled_t {
+	bool u; // use flag
+	long long int n;
+	char* s;
+} evaled_t;
+
+extern evaled_t eval(array_t* lines, line_t* line);
 
 typedef struct arg_A_t {
 	set_t* A;
@@ -12,7 +18,8 @@ typedef struct arg_A_t {
 
 extern bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args);
 
-char* eval(array_t* lines, line_t* line) {
+evaled_t eval(array_t* lines, line_t* line) {
+	evaled_t ret = { 0, 0, NULL };
 	if ((line->line_type == line_type_cmd) && line->val_cmd) {
 		cmd_t* cmd = line->val_cmd;
 		char* cmd_s = (char*) cmd->cmd.data;
@@ -21,12 +28,14 @@ char* eval(array_t* lines, line_t* line) {
 			if (!strcmp(cmd_s, "empty")) {
 				arg_A_t a = { NULL, 0 };
 				if (arg_A_val(&a, lines, args)) {
-					return cmd_empty(a.A) ? "true" : "false";
+					ret.u = true;
+					ret.s = cmd_empty(a.A) ? "true" : "false";
+					return ret;
 				}
 			}
 		}
 	}
-	return NULL;
+	return ret;
 }
 
 set_t* get_universe(array_t* lines) {
