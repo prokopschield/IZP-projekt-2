@@ -3,6 +3,10 @@ void parse(set_t* universe, array_t* lines, FILE* input) {
 	const string_t type_str = read_word(input, &EOL);
 
 	line_t* line = line_init(lines);
+	if (!line) {
+		throw_chars("Parser could not initialize a new line.\n");
+		return;
+	}
 
 	switch (type_str.data[0]) {
 	case 'U':
