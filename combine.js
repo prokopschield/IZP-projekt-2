@@ -20,4 +20,4 @@ for (const file of fs.readdirSync('src')) {
 	process.stdout.write(fs.readFileSync(`src/${file}`));
 }
 
-fs.unlinkSync('src/140-rel.c');
+// fs.unlinkSync('src/140-rel.c');
