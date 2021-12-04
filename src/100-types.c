@@ -36,10 +36,7 @@ typedef struct cmd_t {
 } cmd_t;
 
 enum line_type_t {
-	line_type_undefined,
-	line_type_set,
-	line_type_rel,
-	line_type_cmd,
+	line_type_undefined, line_type_set, line_type_rel, line_type_cmd,
 };
 
 typedef struct line_t {
