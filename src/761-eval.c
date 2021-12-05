@@ -79,6 +79,16 @@ evaled_t eval(array_t* lines, line_t* line) {
 					ret.N = a.N;
 				}
 			}
+		} else if (!strcmp(cmd_s, "reflexive")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 2)) {
+				if (cmd_reflexive(get_universe(lines), a.R)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
 		}
 	}
 	return ret;
