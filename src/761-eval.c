@@ -135,6 +135,12 @@ evaled_t eval(array_t* lines, line_t* line) {
 				line->val_set = cmd_domain(a.R);
 				return ret;
 			}
+		} else if (!strcmp(cmd_s, "codomain")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 1)) {
+				line->val_set = cmd_codomain(a.R);
+				return ret;
+			}
 		}
 	}
 	return ret;
