@@ -1,5 +1,9 @@
 set_t* get_universe(array_t* lines);
 
+void invalid_argument(line_t* line);
+
+line_t* lineload(array_t* lines, size_t n);
+
 typedef struct evaled_t {
 	size_t N; // goto line
 	long long int n;
