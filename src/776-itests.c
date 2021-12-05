@@ -1,3 +1,7 @@
+#include <string.h>
+
+const char* reserved_words[] = { "true", "false", "empty", "card", "complement", "union", "intersect", "minus", "subseteq", "subset", "equals", "reflexive", "symmetric", "antisymmetric", "transitive", "function", "domain", "codomain", "injective", "surjective", "bijective", "closure_ref", "closure_sym", "closure_trans", "select" };
+
 void input_tests() {
 	// only letters allowed!
 	array_t* elements = all_elements();
@@ -10,6 +14,13 @@ void input_tests() {
 				throw_chars("Invalid symbol in element: ");
 				element_print(element, stderr);
 				fputc('\n', stderr);
+			}
+		}
+		for (size_t i = 0; i < 25; ++i) {
+			if (!strcmp((char*) s.data, reserved_words[i])) {
+				throw_chars("Element ");
+				element_print(element, stderr);
+				fprintf(stderr, " is a reserved word!\n");
 			}
 		}
 	}
