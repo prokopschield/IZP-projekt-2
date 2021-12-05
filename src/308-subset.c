@@ -5,10 +5,10 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool cmd_subset(set_t* set1, set_t* set2) {
-    if (set1 == set2)
+bool cmd_subset(set_t* set_A, set_t* set_B) {
+    if (set_A == set_B)
         return false;
-    else if (cmd_subseteq(set1, set2))
+    else if (cmd_subseteq(set_A, set_B))
         return true;
     else
         return false;
