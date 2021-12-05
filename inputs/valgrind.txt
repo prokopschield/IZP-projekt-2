@@ -15,7 +15,9 @@ C card 1
 C card 2
 C card 3
 C card 11
+C card 23
 C complement 1
+C complement 22
 C complement 3
 C union 19 21
 C union 10 4
