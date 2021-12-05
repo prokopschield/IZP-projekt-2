@@ -32,8 +32,8 @@ bool arg_AB_val(arg_AB_t* res, array_t* lines, size_t_array_t* args, size_t max_
 	if (!(res->B = arg_2->val_set)) {
 		invalid_argument(arg_2);
 	}
-	if (args->len >= 2) {
-		res->N = args->items[1];
+	if (args->len >= 3) {
+		res->N = args->items[2];
 	}
 	if (args->len > max_args) {
 		throw_error("Too many arguments: %ld > %ld", args->len, max_args);
