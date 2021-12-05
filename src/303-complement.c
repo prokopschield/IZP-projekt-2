@@ -1,7 +1,3 @@
-//
-// Created by Štefan Pekník on 22.11.2021.
-//
-
 #include <stdbool.h>
 #include <stdio.h>
 
