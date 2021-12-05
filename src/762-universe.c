@@ -8,7 +8,7 @@ set_t* get_universe(array_t* lines) {
 		return empty_set();
 	}
 	const array_t* elements = all_elements();
-	if (universe->number_of_elements != elements->len) {
+	if ((universe->number_of_elements + 1) < elements->len) {
 		for (size_t i = 0; i < elements->len; ++i) {
 			add_element_to_set(elements->items[i], &universe);
 		}
