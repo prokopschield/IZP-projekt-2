@@ -1,9 +1,5 @@
-//
-// Created by jiris on 30/11/2021.
-//
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 bool cmd_symmetric(rel_t* rel) { 
 	for (size_t i = 0; i < rel->number_of_pairs; i++) { 
