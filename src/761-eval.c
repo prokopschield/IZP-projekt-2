@@ -129,6 +129,12 @@ evaled_t eval(array_t* lines, line_t* line) {
 					ret.N = a.N;
 				}
 			}
+		} else if (!strcmp(cmd_s, "domain")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 1)) {
+				line->val_set = cmd_domain(a.R);
+				return ret;
+			}
 		}
 	}
 	return ret;
