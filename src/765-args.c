@@ -41,6 +41,24 @@ bool arg_AB_val(arg_AB_t* res, array_t* lines, size_t_array_t* args, size_t max_
 	return (res->A && res->B);
 }
 
+bool arg_R_val(arg_R_t* res, array_t* lines, size_t_array_t* args,  size_t max_args) {
+	if (args->len < 1) {
+		throw_chars("Insufficient arguments: ");
+		return false;
+	}
+	line_t* arg_1 = lineload(lines, args->items[0]);
+	if (!(res->R = arg_1->val_rel)) {
+		invalid_argument(arg_1);
+	}
+	if (args->len >= 2) {
+		res->N = args->items[1];
+	}
+	if (args->len > max_args) {
+		throw_error("Too many arguments: %ld > %ld", args->len, max_args);
+	}
+	return (res->R);
+}
+
 bool arg_RAB_val(arg_RAB_t* res, array_t* lines, size_t_array_t* args,  size_t max_args) {
 	if (args->len < 3) {
 		throw_chars("Insufficient arguments: ");
