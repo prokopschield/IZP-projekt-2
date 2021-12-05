@@ -1,12 +1,9 @@
-//
-// Created by Štefan Pekník on 04.12.2021.
-//
-
 #include <stdbool.h>
 #include <stdio.h>
 
+// checks if every element in the universe has its own refeflexive pair (e.g. element a : pair (a, a)) included in the rel,
+// if not, it is added to the rel
 rel_t* cmd_closure_ref(set_t* universe, rel_t* rel) {
-    rel_t* ref_rel = empty_rel();
     for (size_t i = 0; i < universe->number_of_elements; i++) {
         pair_t* pair = get_pair(universe->elements[i], universe->elements[i]);
         if (pair == NULL) {
@@ -14,7 +11,7 @@ rel_t* cmd_closure_ref(set_t* universe, rel_t* rel) {
             return NULL;
         }
         if (!is_pair_in_rel(pair, rel))
-            add_pair_to_rel(pair, &ref_rel);
+            add_pair_to_rel(pair, &rel);
     }
-    return ref_rel;
+    return rel;
 }
