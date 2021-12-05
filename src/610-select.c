@@ -6,6 +6,6 @@
 
 set_t* cmd_select(set_t* set) {
 	set_t* newset = empty_set();
-	add_element_to_set(set->elements[rand() % set->number_of_elements], &newset);
+	add_element_to_set(set->elements[rng() % set->number_of_elements], &newset);
 	return newset;
 }
