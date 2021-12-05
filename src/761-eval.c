@@ -69,6 +69,16 @@ evaled_t eval(array_t* lines, line_t* line) {
 					ret.N = a.N;
 				}
 			}
+		} else if (!strcmp(cmd_s, "equals")) {
+			arg_AB_t a = { NULL, NULL, 0 };
+			if (arg_AB_val(&a, lines, args, 3)) {
+				if (cmd_equals(a.A, a.B)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
 		}
 	}
 	return ret;
