@@ -8,6 +8,10 @@ void parse(set_t* universe, array_t* lines, FILE* input) {
 		return;
 	}
 
+	if (type_str.len > 1) {
+		throw_error("Line type identifier must be 1 letter, not \"%s\"!", (char*) type_str.data);
+	}
+
 	switch (type_str.data[0]) {
 	case 'U':
 	case 'S':
