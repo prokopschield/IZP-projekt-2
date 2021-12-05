@@ -28,7 +28,7 @@ bool arg_AB_val(arg_AB_t* res, array_t* lines, size_t_array_t* args, size_t max_
 	if (!(res->A = arg_1->val_set)) {
 		invalid_argument(arg_1);
 	}
-	line_t* arg_2 = lineload(lines, args->items[0]);
+	line_t* arg_2 = lineload(lines, args->items[1]);
 	if (!(res->B = arg_2->val_set)) {
 		invalid_argument(arg_2);
 	}
