@@ -1,13 +1,11 @@
-//
-// Created by Štefan Pekník on 04.12.2021.
-//
-
-
 #include <stdbool.h>
 #include <stdio.h>
 
+// takes pair and finds other pair by rule: a right element from pair1 equals a left element from pairN;
+// and checks whether there is also a pair made of a left element from pair1 and a right element from pairN,
+// if not, the pair is added to the rel
+// and the process goes again to check, whether the newly added pairs have its transitive pairs
 rel_t* cmd_closure_trans(rel_t* rel) {
-    rel_t* trans_rel = empty_rel();
     int c = 0;
     do {
         c = 0;
@@ -20,12 +18,12 @@ rel_t* cmd_closure_trans(rel_t* rel) {
                         return NULL;
                     }
                     if (!is_pair_in_rel(pair, rel)) {
-                        add_pair_to_rel(pair, &trans_rel);
+                        add_pair_to_rel(pair, &rel);
                         c++;
                     }
                 }
             }
         }
     } while (c != 0);
-    return trans_rel;
+    return rel;
 }
