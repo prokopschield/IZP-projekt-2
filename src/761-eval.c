@@ -119,6 +119,16 @@ evaled_t eval(array_t* lines, line_t* line) {
 					ret.N = a.N;
 				}
 			}
+		} else if (!strcmp(cmd_s, "function")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 2)) {
+				if (cmd_function(a.R)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
 		}
 	}
 	return ret;
