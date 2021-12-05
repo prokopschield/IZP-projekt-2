@@ -64,5 +64,5 @@ bool arg_RAB_val(arg_RAB_t* res, array_t* lines, size_t_array_t* args,  size_t m
 	if (args->len > max_args) {
 		throw_error("Too many arguments: %ld > %ld", args->len, max_args);
 	}
-	return (res->A && res->B);
+	return (res->R && res->A && res->B);
 }
