@@ -189,6 +189,31 @@ evaled_t eval(array_t* lines, line_t* line) {
 				line->val_rel = cmd_closure_trans(a.R);
 				return ret;
 			}
+		} else if (!strcmp(cmd_s, "select")) {
+			if (args->len > 2) {
+				throw_error("Too many select() arguments (%ld > 2)", args->len);
+			}
+			if (args->len > 0) {
+				line_t* A = lineload(lines, args->items[0]);
+				if (A->val_set && (A->val_set != empty_set())) {
+					line->val_set = cmd_select(A->val_set);
+				} else if (A->val_rel && (A->val_rel != empty_rel())) {
+					set_t* domain = cmd_domain(A->val_rel);
+					set_t* codomain = cmd_codomain(A->val_rel);
+					if (domain && codomain) { // malloc may have failed
+						set_t* u = cmd_union(domain, codomain);
+						if (u) { // malloc may have failed
+							line->val_set = cmd_select(u);
+						}
+					}
+				} else if (args->len >= 2) {
+					// goto line N
+					ret.N = args->items[1];
+				} else {
+					line->val_set = empty_set();
+				}
+				return ret;
+			}
 		}
 	}
 	return ret;
