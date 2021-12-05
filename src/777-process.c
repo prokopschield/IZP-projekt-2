@@ -7,6 +7,7 @@ int process(FILE* input, FILE* output) {
 	while (!error.any && !feof(input)) {
 		parse(lines.len > 1 ? (((line_t*) lines.items[1])->val_set) : NULL, &lines, input);
 	}
+	input_tests();
 	while (!error.any && (line_i < lines.len)) {
 		execute(&lines, &line_i, output);
 	}
