@@ -19,3 +19,15 @@ C card 7
 C complement 1
 C complement 7
 C complement 3
+C union 19 21
+C union 10 4
+C intersect 2 3
+C minus 23 24
+C subseteq 21 20
+C subseteq 21 22
+C subset 21 20
+C subset 21 22
+C equals 21 22
+C equals 19 2
+C equals 1 20
+C equals 24 24
