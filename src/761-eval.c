@@ -171,6 +171,24 @@ evaled_t eval(array_t* lines, line_t* line) {
 					ret.N = a.N;
 				}
 			}
+		} else if (!strcmp(cmd_s, "closure_ref")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 1)) {
+				line->val_rel = cmd_closure_ref(get_universe(lines), a.R);
+				return ret;
+			}
+		} else if (!strcmp(cmd_s, "closure_sym")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 1)) {
+				line->val_rel = cmd_closure_sym(a.R);
+				return ret;
+			}
+		} else if (!strcmp(cmd_s, "closure_trans")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 1)) {
+				line->val_rel = cmd_closure_trans(a.R);
+				return ret;
+			}
 		}
 	}
 	return ret;
