@@ -26,6 +26,9 @@ string_t read_word(FILE* stream, bool* EOL) {
 			*EOL = true;
 			break;
 		} else if (buffer[length] == '\n') {
+			if (*EOL) {
+				throw_chars("Empty line!\n");
+			}
 			*EOL = true;
 		}
 	}
