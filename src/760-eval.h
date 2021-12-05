@@ -23,3 +23,19 @@ typedef struct arg_AB_t {
 } arg_AB_t;
 
 extern bool arg_AB_val(arg_AB_t* res, array_t* lines, size_t_array_t* args, size_t max_args);
+
+typedef struct arg_R_t {
+	rel_t* R;
+	size_t N;
+} arg_R_t;
+
+extern bool arg_R_val(arg_R_t* res, array_t* lines, size_t_array_t* args, size_t max_args);
+
+typedef struct arg_RAB_t {
+	rel_t* R;
+	set_t* A;
+	set_t* B;
+	size_t N;
+} arg_RAB_t;
+
+extern bool arg_RAB_val(arg_RAB_t* res, array_t* lines, size_t_array_t* args, size_t max_args);
