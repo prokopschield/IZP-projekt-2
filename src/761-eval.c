@@ -49,6 +49,16 @@ evaled_t eval(array_t* lines, line_t* line) {
 				line->val_set = cmd_minus(a.A, a.B);
 				return ret;
 			}
+		} else if (!strcmp(cmd_s, "subseteq")) {
+			arg_AB_t a = { NULL, NULL, 0 };
+			if (arg_AB_val(&a, lines, args, 3)) {
+				if (cmd_subseteq(a.A, a.B)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
 		}
 	}
 	return ret;
