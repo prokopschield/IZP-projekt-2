@@ -141,6 +141,36 @@ evaled_t eval(array_t* lines, line_t* line) {
 				line->val_set = cmd_codomain(a.R);
 				return ret;
 			}
+		} else if (!strcmp(cmd_s, "injective")) {
+			arg_RAB_t a = { NULL, NULL, NULL, 0 };
+			if (arg_RAB_val(&a, lines, args, 3)) {
+				if (cmd_injective(a.R, a.A, a.B)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
+		} else if (!strcmp(cmd_s, "surjective")) {
+			arg_RAB_t a = { NULL, NULL, NULL, 0 };
+			if (arg_RAB_val(&a, lines, args, 3)) {
+				if (cmd_surjective(a.R, a.A, a.B)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
+		} else if (!strcmp(cmd_s, "bijective")) {
+			arg_RAB_t a = { NULL, NULL, NULL, 0 };
+			if (arg_RAB_val(&a, lines, args, 3)) {
+				if (cmd_bijective(a.R, a.A, a.B)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
 		}
 	}
 	return ret;
