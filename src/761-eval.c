@@ -9,7 +9,7 @@ evaled_t eval(array_t* lines, line_t* line) {
 		size_t_array_t* args = (size_t_array_t*) cmd->args;
 		if (!strcmp(cmd_s, "empty")) {
 			arg_A_t a = { NULL, 0 };
-			if (arg_A_val(&a, lines, args)) {
+			if (arg_A_val(&a, lines, args, 2)) {
 				if (cmd_empty(a.A)) {
 					ret.s = "true";
 				} else {
@@ -20,14 +20,14 @@ evaled_t eval(array_t* lines, line_t* line) {
 			}
 		} else if (!strcmp(cmd_s, "card")) {
 			arg_A_t a = { NULL, 0 };
-			if (arg_A_val(&a, lines, args)) {
+			if (arg_A_val(&a, lines, args, 1)) {
 				ret.u = true;
 				ret.n = (long long int) cmd_card(a.A);
 				return ret;
 			}
 		} else if (!strcmp(cmd_s, "complement")) {
 			arg_A_t a = { NULL, 0 };
-			if (arg_A_val(&a, lines, args)) {
+			if (arg_A_val(&a, lines, args, 1)) {
 				line->val_set = cmd_complement(get_universe(lines), a.A);
 				return ret;
 			}

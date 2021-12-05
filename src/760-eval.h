@@ -14,7 +14,7 @@ typedef struct arg_A_t {
 	size_t N;
 } arg_A_t;
 
-extern bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args);
+extern bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args, size_t max_args);
 
 typedef struct arg_AB_t {
 	set_t* A;
@@ -23,4 +23,4 @@ typedef struct arg_AB_t {
 	byte_t is_rel;
 } arg_AB_t;
 
-extern bool arg_AB_val(arg_AB_t* res, array_t* lines, size_t_array_t* args);
+extern bool arg_AB_val(arg_AB_t* res, array_t* lines, size_t_array_t* args, size_t max_args);
