@@ -1,6 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+// checks if every pair in the rel has its symmetric pair in the rel (e.g. (a, b) -> (b, a)),
+// if any pair has not its symmetric pair, returns false,
+// else returns true
 bool cmd_symmetric(rel_t* rel) { 
 	for (size_t i = 0; i < rel->number_of_pairs; i++) { 
 		pair_t* pair = get_pair(rel->pairs[i]->right, rel->pairs[i]->left);
