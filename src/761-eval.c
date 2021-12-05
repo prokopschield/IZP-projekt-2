@@ -31,6 +31,12 @@ evaled_t eval(array_t* lines, line_t* line) {
 				line->val_set = cmd_complement(get_universe(lines), a.A);
 				return ret;
 			}
+		} else if (!strcmp(cmd_s, "union")) {
+			arg_AB_t a = { NULL, NULL, 0 };
+			if (arg_AB_val(&a, lines, args, 2)) {
+				line->val_set = cmd_union(a.A, a.B);
+				return ret;
+			}
 		}
 	}
 	return ret;
