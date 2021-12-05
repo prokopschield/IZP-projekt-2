@@ -89,6 +89,36 @@ evaled_t eval(array_t* lines, line_t* line) {
 					ret.N = a.N;
 				}
 			}
+		} else if (!strcmp(cmd_s, "symmetric")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 2)) {
+				if (cmd_symmetric(a.R)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
+		} else if (!strcmp(cmd_s, "antisymmetric")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 2)) {
+				if (cmd_antisymmetric(a.R)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
+		} else if (!strcmp(cmd_s, "transitive")) {
+			arg_R_t a = { NULL, 0 };
+			if (arg_R_val(&a, lines, args, 2)) {
+				if (cmd_transitive(a.R)) {
+					ret.s = "true";
+				} else {
+					ret.s = "false";
+					ret.N = a.N;
+				}
+			}
 		}
 	}
 	return ret;
