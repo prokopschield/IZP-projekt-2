@@ -1,6 +1,6 @@
 bool arg_A_val(arg_A_t* res, array_t* lines, size_t_array_t* args) {
 	if (args->len < 1) {
-		throw_error("Insufficient (%ld) arguments for empty()", args->len);
+		throw_chars("Insufficient arguments: ");
 		return false;
 	}
 	line_t* arg_1 = line_get(lines, args->items[0]);
