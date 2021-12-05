@@ -214,6 +214,8 @@ evaled_t eval(array_t* lines, line_t* line) {
 				}
 				return ret;
 			}
+		} else {
+			throw_error("Unknown command: \"%s\"", cmd_s);
 		}
 	}
 	return ret;
